@@ -8,7 +8,24 @@ function App(){
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");
   function handleSubmit(e){
-  e.preventDefault(); // prevent refresh
+  // e.preventDefault(); // prevent refresh
+  if(name.trim() === ""){
+    alert("Please enter valid name");
+    return;
+  }
+  
+    if(age.trim() === ""){
+    alert("Please enter age");
+    return;
+  }
+    if(email.trim() === ""){
+    alert("Please enter valid email");
+    return;
+  }
+    if(password.trim() === ""){
+    alert("Please enter valid password");
+    return;
+  }
   alert(`Welcome  ${name}`)
 }
   return(
@@ -32,7 +49,7 @@ function App(){
       />
       <input
       placeholder="Enter Email"
-      type="text"
+      type="email"
       value={email}
       onChange={(e) => setEmail(e.target.value)}
       />
