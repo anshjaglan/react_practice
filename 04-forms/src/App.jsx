@@ -1,6 +1,5 @@
+// React forms practice here i used multiple states, onSubmit , onChange, conditional rendering and passwoed masking
 import { useState } from "react"
-
-
 
 function App(){
   // create mutiple states
