@@ -41,7 +41,7 @@ function App(){
         onChange={(e) => setTask( e.target.value)}
       />
       <button onClick={addTask}> 
-            {editIndex !== null? "update" :"add"}
+            {editIndex !== null? "update" :"add" }
          </button>
       
       {
