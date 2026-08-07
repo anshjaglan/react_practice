@@ -7,7 +7,7 @@ function App(){
   const[age, setAge] = useState("");
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");
-  function handleSubmit(e){
+  function handleSubmit(){
   // e.preventDefault(); // prevent refresh
   if(name.trim() === ""){
     alert("Please enter valid name");
