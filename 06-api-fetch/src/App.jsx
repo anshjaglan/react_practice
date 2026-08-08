@@ -3,14 +3,28 @@ import { useState } from "react";
 function App(){
   const[username, setUsername] = useState("");
   const[user, setUser] = useState(null);
+  const[loading, setLoading] = useState(false);
+  const[error, setError] = useState("");
 
     async function searchUser() {
+      setLoading(true);
+      setError("");
+      setUser(null);
+      try{
       const response = await fetch(
        `https://api.github.com/users/${username}` 
       );
+
+      if(!response.ok){
+        throw new Error("User not found");
+      }
       const data = await response.json();
       setUser(data);
+  } catch (error){
+    setError(error.message);
   }
+  setLoading(false);
+}
 
   return(
     <div>
@@ -23,6 +37,8 @@ function App(){
     <button onClick={searchUser}>
     Search
     </button>
+    {loading && <p>{loading}</p>}
+    {error && <p>{error}</p>}
     {
       user && (
 
