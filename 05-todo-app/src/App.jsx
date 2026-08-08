@@ -47,7 +47,7 @@ function App(){
       {
         tasks.map((item, index) => (
           <div key={index}>
-            <h1>{item}</h1>
+            <h3>{item}</h3>
             <button onClick={() => deleteTask(index)}>Delete</button>
             <button onClick={() => editTask(index)}> Edit </button>
 
