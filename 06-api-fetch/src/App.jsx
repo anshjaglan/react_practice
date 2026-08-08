@@ -11,7 +11,7 @@ function App(){
       const data = await response.json();
       setUser(data);
   }
-  
+
   return(
     <div>
     <h1>Github User</h1>
@@ -23,6 +23,20 @@ function App(){
     <button onClick={searchUser}>
     Search
     </button>
+    {
+      user && (
+
+        // <pre>
+        //   {JSON.stringify(user, null, 2)}
+        // </pre>
+        <div>
+          <h2>{user.name}</h2>
+          <p>Username : {user.login}</p>
+          <p>Followers : {user.followers}</p>
+          <p>Repositories : {user.public_repos}</p>
+        </div>
+      )
+    }
     </div>
   );
 
