@@ -2,30 +2,26 @@ function App(){
   return (
     <div>
       <h1>My App</h1>
-      <User />
-      <User2 />
+
+      <User name="Ansh" course="B.Tech CSE" />
+      <User name="Avi" course="Class 10" />
+     
     </div>
   );
 
 
 
 }
-function User(){
+function User({name, course}){
   return(
     <div>
-      <h2>Ansh</h2>
-      <p>B.Tech CSE</p>
+      <h2>{name}</h2>
+      <h3>{course}</h3>
+      
     </div>
   )
 };
 
-function User2(){
-  return(
-    <div>
-      <h2>Jaglan</h2>
-      <p>B.Tech CSE</p>
-    </div>
-  )
-}
+
 
 export default App;
