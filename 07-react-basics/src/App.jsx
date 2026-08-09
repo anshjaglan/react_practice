@@ -43,7 +43,7 @@ function App(){
   return(
     <div>
       <h1>Users</h1>
-      {users.map((user, index) => 
+      {user.map((user, index) => 
       <User 
           key={index}
           name={user.name}
