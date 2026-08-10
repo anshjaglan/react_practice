@@ -37,6 +37,18 @@ const user =[
     city : "shamli"
 
   },
+      {
+        name: "Avi",
+        course: "Class 10",
+        age: 16,
+        city: "Shamli"
+    },
+    {
+        name: "Rahul",
+        course: "BCA",
+        age: 20,
+        city: "Delhi"
+    }
 ];
 
 function App(){
