@@ -64,6 +64,9 @@ function User({name, course, age, city}) {
     <div>
       <h2>{name}</h2>
       <p>Course : {course}</p>
+      <button onClick={() => setShowDetails(!showDetails)}>
+        Show Details
+      </button>
       <p>Age : {age}</p>
       <p>City : {city}</p>
       <hr />
