@@ -65,7 +65,7 @@ function User({name, course, age, city}) {
       <h2>{name}</h2>
       <p>Course : {course}</p>
       <button onClick={() => setShowDetails(!showDetails)}>
-        Show Details
+        {showDetails ? "hide details" : "Show details"}
       </button>
       { showDetails && (
         <div>
