@@ -28,7 +28,7 @@
 
 // export default App;
 
-
+import { useState } from "react";
 const user =[
   {
     name : "Ansh",
@@ -50,6 +50,7 @@ function App(){
           course={user.course}
           city={user.city}
           age={user.age}
+          
       />
       )}
     </div>
@@ -57,6 +58,8 @@ function App(){
 }
 
 function User({name, course, age, city}) {
+
+  const[showDetails, setShowDetails] = useState{false};
   return (
     <div>
       <h2>{name}</h2>
