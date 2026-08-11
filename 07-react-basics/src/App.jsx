@@ -31,8 +31,13 @@
 import { useState } from "react";
 
 function App() {
-    const [users, setUsers] = useState([
-        {
+  const[name, setName] = useState("");
+  const[age, setAge] = useState("");
+  const[course, setCourse] = useState("");
+  const[city, setCity] = useState("");
+  const [users, setUsers] = useState([
+     
+      {
             name: "Ansh",
             course: "B.Tech CSE",
             age: 21,
@@ -68,6 +73,12 @@ function App() {
                             users.filter((_, i) => i !== index)
                         );
                     }}
+                />
+                <input 
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.val)}}
                 />
             ))}
         </div>
