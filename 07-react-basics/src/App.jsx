@@ -29,47 +29,52 @@
 // export default App;
 
 import { useState } from "react";
-const user =[
-  {
-    name : "Ansh",
-    course : "B.Tech CSE",
-    age : 21,
-    city : "shamli"
 
-  },
-      {
-        name: "Avi",
-        course: "Class 10",
-        age: 16,
-        city: "Shamli"
-    },
-    {
-        name: "Rahul",
-        course: "BCA",
-        age: 20,
-        city: "Delhi"
-    }
-];
+function App() {
+    const [users, setUsers] = useState([
+        {
+            name: "Ansh",
+            course: "B.Tech CSE",
+            age: 21,
+            city: "Shamli"
+        },
+        {
+            name: "Avi",
+            course: "Class 10",
+            age: 16,
+            city: "Shamli"
+        },
+        {
+            name: "Rahul",
+            course: "BCA",
+            age: 20,
+            city: "Delhi"
+        }
+    ]);
 
-function App(){
-  return(
-    <div>
-      <h1>Users</h1>
-      {user.map((user, index) => 
-      <User 
-          key={index}
-          name={user.name}
-          course={user.course}
-          city={user.city}
-          age={user.age}
-          
-      />
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <h1>Users</h1>
+
+            {users.map((user, index) => (
+                <User
+                    key={index}
+                    name={user.name}
+                    course={user.course}
+                    city={user.city}
+                    age={user.age}
+                    onDelete={() => {
+                        setUsers(
+                            users.filter((_, i) => i !== index)
+                        );
+                    }}
+                />
+            ))}
+        </div>
+    );
 }
 
-function User({name, course, age, city}) {
+function User({name, course, age, city, onDelete }) {
 
   const[showDetails, setShowDetails] = useState(false);
   return (
@@ -79,10 +84,14 @@ function User({name, course, age, city}) {
       <button onClick={() => setShowDetails(!showDetails)}>
         {showDetails ? "hide details" : "Show details"}
       </button>
+      <button onClick={onDelete}>
+        Delete
+      </button>
       { showDetails && (
         <div>
          <p>Age : {age}</p>
          <p>City : {city}</p>
+
         </div>
       )
 
