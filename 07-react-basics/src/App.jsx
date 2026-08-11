@@ -74,13 +74,32 @@ function App() {
                         );
                     }}
                 />
+
+            ))}
                 <input 
                 type="text"
                 placeholder="Name"
                 value={name}
-                onChange={(e) => setName(e.target.val)}}
+                onChange={(e) => setName(e.target.value)}
                 />
-            ))}
+                <input 
+                type="text"
+                placeholder="Course"
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
+                />
+                <input
+                type="number"
+                placeholder="Age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                />
+                <input 
+                type="text"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                />
         </div>
     );
 }
@@ -88,6 +107,15 @@ function App() {
 function User({name, course, age, city, onDelete }) {
 
   const[showDetails, setShowDetails] = useState(false);
+  function addUser(){
+  const newUser = {
+    name: name,
+    course: course,
+    age: age,
+    city: city
+  };
+  setUsers([...users, newUser]);
+}
   return (
     <div>
       <h2>{name}</h2>
@@ -98,18 +126,25 @@ function User({name, course, age, city, onDelete }) {
       <button onClick={onDelete}>
         Delete
       </button>
+            <button onClick={addUser}>
+        Add User
+      </button>
+
       { showDetails && (
         <div>
          <p>Age : {age}</p>
          <p>City : {city}</p>
+         
 
         </div>
       )
-
+        
       }
       <hr />
     </div>
   );
 }
+
+
 
 export default App;
