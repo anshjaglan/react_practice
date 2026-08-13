@@ -1,4 +1,4 @@
-//here is full code
+
 import { useState } from "react";
 
 function App() {
