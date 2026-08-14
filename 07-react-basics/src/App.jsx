@@ -31,7 +31,7 @@ function App() {
         }
     ]);
     // edit state
-   //  const[editIndex, setEditIndex] = useState(null);
+const[editIndex, setEditIndex] = useState(null);
 
     // Add User
     function addUser() {
@@ -67,6 +67,17 @@ function App() {
             users.filter((_, index) => index !== indexToDelete)
         );
     }
+
+    // edit user
+    function editUser(index){
+        const user = users[index];
+
+        setName(user.name);
+        setCourse(user.course);
+        setAge(user.age);
+        setCity(user.city);
+        setEditIndex(index);
+    }
     
 
     return (
@@ -84,6 +95,7 @@ function App() {
                     age={user.age}
                     city={user.city}
                     onDelete={() => deleteUser(index)}
+                    onEdit={() => editUser(index)}
                 />
             ))}
 
@@ -141,7 +153,7 @@ function App() {
 }
 
 
-function User({ name, course, age, city, onDelete }) {
+function User({ name, course, age, city, onDelete, onEdit }) {
 
     const [showDetails, setShowDetails] = useState(false);
 
@@ -161,7 +173,7 @@ function User({ name, course, age, city, onDelete }) {
             <button onClick={onDelete}>
                 Delete
             </button>
-            <button>
+            <button onClick={onEdit}>
                 Edit User
             </button>
 
