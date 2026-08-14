@@ -30,6 +30,8 @@ function App() {
             city: "Delhi"
         }
     ]);
+    // edit state
+   //  const[editIndex, setEditIndex] = useState(null);
 
     // Add User
     function addUser() {
@@ -65,6 +67,7 @@ function App() {
             users.filter((_, index) => index !== indexToDelete)
         );
     }
+    
 
     return (
         <div>
@@ -157,6 +160,9 @@ function User({ name, course, age, city, onDelete }) {
 
             <button onClick={onDelete}>
                 Delete
+            </button>
+            <button>
+                Edit User
             </button>
 
             {showDetails && (
