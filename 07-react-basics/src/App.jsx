@@ -1,15 +1,19 @@
-
 import { useState } from "react";
 
 function App() {
 
-    // Input states
+    // ---------------- INPUT STATES ----------------
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [course, setCourse] = useState("");
     const [city, setCity] = useState("");
 
-    // Users state
+    // ---------------- EDIT STATE ----------------
+    // null = currently adding a new user
+    // number = currently editing that user's index
+    const [editIndex, setEditIndex] = useState(null);
+
+    // ---------------- USERS STATE ----------------
     const [users, setUsers] = useState([
         {
             name: "Ansh",
@@ -30,10 +34,9 @@ function App() {
             city: "Delhi"
         }
     ]);
-    // edit state
-const[editIndex, setEditIndex] = useState(null);
 
-    // Add User
+
+    // ---------------- ADD USER ----------------
     function addUser() {
 
         if (
@@ -54,57 +57,116 @@ const[editIndex, setEditIndex] = useState(null);
 
         setUsers([...users, newUser]);
 
-        // Clear inputs
+        clearInputs();
+    }
+
+
+    // ---------------- DELETE USER ----------------
+    function deleteUser(indexToDelete) {
+
+        setUsers(
+            users.filter((_, index) => index !== indexToDelete)
+        );
+    }
+
+
+    // ---------------- EDIT USER ----------------
+    function editUser(index) {
+
+        const user = users[index];
+
+        // Put selected user's data into inputs
+        setName(user.name);
+        setCourse(user.course);
+        setAge(user.age);
+        setCity(user.city);
+
+        // Remember which user we are editing
+        setEditIndex(index);
+    }
+
+
+    // ---------------- UPDATE USER ----------------
+    function updateUser() {
+
+        if (
+            name.trim() === "" ||
+            course.trim() === "" ||
+            age === "" ||
+            city.trim() === ""
+        ) {
+            return;
+        }
+
+        const updatedUser = {
+            name: name,
+            course: course,
+            age: age,
+            city: city
+        };
+
+        const updatedUsers = [...users];
+
+        updatedUsers[editIndex] = updatedUser;
+
+        setUsers(updatedUsers);
+
+        // Go back to Add mode
+        setEditIndex(null);
+
+        clearInputs();
+    }
+
+
+    // ---------------- CLEAR INPUTS ----------------
+    function clearInputs() {
         setName("");
         setCourse("");
         setAge("");
         setCity("");
     }
 
-    // Delete User
-    function deleteUser(indexToDelete) {
-        setUsers(
-            users.filter((_, index) => index !== indexToDelete)
-        );
-    }
-
-    // edit user
-    function editUser(index){
-        const user = users[index];
-
-        setName(user.name);
-        setCourse(user.course);
-        setAge(user.age);
-        setCity(user.city);
-        setEditIndex(index);
-    }
-    
 
     return (
         <div>
 
             <h1>Users</h1>
 
-            {/* Display Users */}
+            {/* ---------------- DISPLAY USERS ---------------- */}
 
             {users.map((user, index) => (
+
                 <User
                     key={index}
+
                     name={user.name}
                     course={user.course}
                     age={user.age}
                     city={user.city}
+
                     onDelete={() => deleteUser(index)}
+
                     onEdit={() => editUser(index)}
                 />
+
             ))}
 
 
             <hr />
 
-            <h2>Add New User</h2>
 
-            {/* Name */}
+            {/* ---------------- FORM ---------------- */}
+
+            <h2>
+                {editIndex === null
+                    ? "Add New User"
+                    : "Edit User"
+                }
+            </h2>
+
+
+            {/* NAME */}
+
             <input
                 type="text"
                 placeholder="Name"
@@ -112,9 +174,12 @@ const[editIndex, setEditIndex] = useState(null);
                 onChange={(e) => setName(e.target.value)}
             />
 
-            <br /><br />
+            <br />
+            <br />
 
-            {/* Course */}
+
+            {/* COURSE */}
+
             <input
                 type="text"
                 placeholder="Course"
@@ -122,9 +187,12 @@ const[editIndex, setEditIndex] = useState(null);
                 onChange={(e) => setCourse(e.target.value)}
             />
 
-            <br /><br />
+            <br />
+            <br />
 
-            {/* Age */}
+
+            {/* AGE */}
+
             <input
                 type="number"
                 placeholder="Age"
@@ -132,9 +200,12 @@ const[editIndex, setEditIndex] = useState(null);
                 onChange={(e) => setAge(e.target.value)}
             />
 
-            <br /><br />
+            <br />
+            <br />
 
-            {/* City */}
+
+            {/* CITY */}
+
             <input
                 type="text"
                 placeholder="City"
@@ -142,18 +213,56 @@ const[editIndex, setEditIndex] = useState(null);
                 onChange={(e) => setCity(e.target.value)}
             />
 
-            <br /><br />
+            <br />
+            <br />
 
-            <button onClick={addUser}>
-                Add User
+
+            {/* ADD / UPDATE BUTTON */}
+
+            <button
+                onClick={
+                    editIndex === null
+                        ? addUser
+                        : updateUser
+                }
+            >
+                {editIndex === null
+                    ? "Add User"
+                    : "Update User"
+                }
             </button>
+
+
+            {/* CANCEL EDIT */}
+
+            {editIndex !== null && (
+                <button
+                    onClick={() => {
+                        setEditIndex(null);
+                        clearInputs();
+                    }}
+                >
+                    Cancel
+                </button>
+            )}
 
         </div>
     );
 }
 
 
-function User({ name, course, age, city, onDelete, onEdit }) {
+// ==================================================
+// USER COMPONENT
+// ==================================================
+
+function User({
+    name,
+    course,
+    age,
+    city,
+    onDelete,
+    onEdit
+}) {
 
     const [showDetails, setShowDetails] = useState(false);
 
@@ -162,27 +271,55 @@ function User({ name, course, age, city, onDelete, onEdit }) {
 
             <h2>{name}</h2>
 
-            <p>Course: {course}</p>
+            <p>
+                Course: {course}
+            </p>
+
+
+            {/* SHOW / HIDE */}
 
             <button
-                onClick={() => setShowDetails(!showDetails)}
+                onClick={() =>
+                    setShowDetails(!showDetails)
+                }
             >
-                {showDetails ? "Hide Details" : "Show Details"}
+                {showDetails
+                    ? "Hide Details"
+                    : "Show Details"
+                }
             </button>
 
-            <button onClick={onDelete}>
-                Delete
-            </button>
+
+            {/* EDIT */}
+
             <button onClick={onEdit}>
                 Edit User
             </button>
 
+
+            {/* DELETE */}
+
+            <button onClick={onDelete}>
+                Delete
+            </button>
+
+
+            {/* DETAILS */}
+
             {showDetails && (
                 <div>
-                    <p>Age: {age}</p>
-                    <p>City: {city}</p>
+
+                    <p>
+                        Age: {age}
+                    </p>
+
+                    <p>
+                        City: {city}
+                    </p>
+
                 </div>
             )}
+
 
             <hr />
 
