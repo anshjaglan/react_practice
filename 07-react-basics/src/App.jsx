@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function App() {
-    // final code
+ 
     // ---------------- INPUT STATES ----------------
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
