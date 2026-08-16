@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function App(){
   // const[count, setCount] = useState(0);
   const[user, setUser] = useState([]);
+  const[loading, setLoading] = useState(true);
   useEffect(() => {
     console.log("const chnaged")
   },[])
@@ -13,6 +14,7 @@ function App(){
      
       // console.log(data);
       setUser(data);
+      setLoading(false)
     })
   },[])
 
@@ -25,14 +27,15 @@ function App(){
       Increase
       </button> */}
       <h1>User</h1>
-      {user.map((item) => (
+      {loading ? (<h2>Loading...</h2>) : (user.map((item) => (
         <div key={item.id}>
           <h2>{item.name}</h2>
           <h3>{item.username}</h3>
           <p>{item.address.city}</p>
       {/* <button onClick={() => setUser(user)}> user details</button> */}
         </div>
-      ))}
+      ))) }
+
       
     </div>
   );
