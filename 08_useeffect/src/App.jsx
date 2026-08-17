@@ -20,12 +20,7 @@ function App(){
 
   return(
     <div>
-      {/* <h1>useEffect Ptractice</h1>
-      <h2>{count}</h2>
 
-      <button onClick={() => setCount(count+1)}>
-      Increase
-      </button> */}
       <h1>User</h1>
       {loading ? (<h2>Loading...</h2>) : (user.map((item) => (
         <div key={item.id}>
