@@ -13,13 +13,6 @@ function App(){
   }, [tasks]);
 
 
-  // useEffect(() => {
-  //   const savedTasks = localStorage.getItem("tasks");
-
-  //   if(savedTasks){
-  //     setTasks(JSON.parse(savedTasks));
-  //   }
-  // },[]);
 
 
   function addTask(){
